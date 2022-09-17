@@ -38,7 +38,7 @@ class NYCSchoolFragment: Fragment() {
     private fun initializeObserver() {
         viewModel.schoolListObserver.observe(viewLifecycleOwner, Observer {
             binding.schoolRecyclerView.adapter = NYCSchoolAdapter(it)
-            // todo make it efficient
+            // todo make it efficient,
             binding.schoolRecyclerView.adapter?.notifyDataSetChanged()
         })
     }
