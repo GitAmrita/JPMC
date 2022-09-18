@@ -1,6 +1,7 @@
 package com.example.jpmc.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,10 +15,9 @@ import com.example.jpmc.databinding.FragmentNycSchoolBinding
 import com.example.jpmc.repository.SchoolRepoImpl
 import com.example.jpmc.viewModel.SchoolViewModel
 import com.example.jpmc.viewModel.SchoolViewModelFactory
-import java.time.Duration
 
 class NYCSchoolFragment: Fragment() {
-
+    private  val logTag = "NYCSchoolFragment"
     private lateinit var binding : FragmentNycSchoolBinding
     private val viewModel by lazy {
         ViewModelProvider(this, SchoolViewModelFactory(
@@ -44,9 +44,12 @@ class NYCSchoolFragment: Fragment() {
             binding.schoolRecyclerView.adapter = NYCSchoolAdapter(it)
             // todo make it efficient,
             binding.schoolRecyclerView.adapter?.notifyDataSetChanged()
+            binding.progressBar.visibility = View.GONE
         })
         viewModel.schoolListErrorObserver.observe(viewLifecycleOwner, Observer {
-            // todo move string to res
+            // todo move string to res folder
+            Log.e(logTag, it)
+            binding.progressBar.visibility = View.GONE
             Toast.makeText(requireContext(),
                 "Error occurred while retrieving school list",
                 Toast.LENGTH_SHORT).show()
