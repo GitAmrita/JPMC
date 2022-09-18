@@ -12,12 +12,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jpmc.NYCSchoolAdapter
 import com.example.jpmc.databinding.FragmentNycSchoolBinding
+import com.example.jpmc.model.NYCSchool
 import com.example.jpmc.repository.SchoolRepoImpl
 import com.example.jpmc.viewModel.SchoolViewModel
 import com.example.jpmc.viewModel.SchoolViewModelFactory
 
 class NYCSchoolFragment: Fragment() {
-    private  val logTag = "NYCSchoolFragment"
+    private val logTag = "NYCSchoolFragment"
+    private lateinit var schools: List<NYCSchool>
     private lateinit var binding : FragmentNycSchoolBinding
     private val viewModel by lazy {
         ViewModelProvider(this, SchoolViewModelFactory(
@@ -31,6 +33,7 @@ class NYCSchoolFragment: Fragment() {
         binding = FragmentNycSchoolBinding.inflate(inflater, container, false)
         initializeRecyclerView()
         initializeObserver()
+        setOnFilterClick()
         getSchools()
         return binding.root
     }
@@ -42,6 +45,7 @@ class NYCSchoolFragment: Fragment() {
     private fun initializeObserver() {
         viewModel.schoolListObserver.observe(viewLifecycleOwner, Observer {
             binding.schoolRecyclerView.adapter = NYCSchoolAdapter(it)
+            schools = it
             // todo make it efficient,
             binding.schoolRecyclerView.adapter?.notifyDataSetChanged()
             binding.progressBar.visibility = View.GONE
@@ -58,6 +62,14 @@ class NYCSchoolFragment: Fragment() {
 
     private fun getSchools() {
         viewModel.getSchoolList()
+    }
+
+    private fun setOnFilterClick() {
+        binding.filterButton.setOnClickListener {
+            val lst = viewModel.getFilteredSchoolList(binding.filterText.text.toString(), schools)
+            binding.schoolRecyclerView.adapter = NYCSchoolAdapter(lst)
+            binding.schoolRecyclerView.adapter?.notifyDataSetChanged()
+        }
     }
 }
 

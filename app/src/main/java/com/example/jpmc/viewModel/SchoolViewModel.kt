@@ -1,5 +1,6 @@
 package com.example.jpmc.viewModel
 
+import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,6 +26,14 @@ class SchoolViewModel(private val repo: SchoolRepoImpl): ViewModel() {
                 is NetworkResult.Success -> mutableSchoolList.value = response.data!!
                 is NetworkResult.Error -> mutableSchoolListError.value = response.message!!
             }
+        }
+    }
+
+    fun getFilteredSchoolList(filter: String, schools: List<NYCSchool>): List<NYCSchool> {
+        return if (filter.isDigitsOnly()) {
+            schools.filter { s -> s.zip.contains(filter) }
+        } else {
+            schools.filter { s -> s.city.contains(filter, ignoreCase = true) }
         }
     }
 
