@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jpmc.NYCSchoolAdapter
 import com.example.jpmc.databinding.FragmentNycSchoolBinding
 import com.example.jpmc.model.NYCSchool
+import com.example.jpmc.repository.SchoolRepo
 import com.example.jpmc.repository.SchoolRepoImpl
 import com.example.jpmc.viewModel.SchoolViewModel
 import com.example.jpmc.viewModel.SchoolViewModelFactory

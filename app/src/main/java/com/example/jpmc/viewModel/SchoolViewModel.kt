@@ -7,11 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jpmc.model.NYCSchool
 import com.example.jpmc.network.NetworkResult
-import com.example.jpmc.repository.SchoolRepoImpl
+import com.example.jpmc.repository.SchoolRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SchoolViewModel(private val repo: SchoolRepoImpl): ViewModel() {
+class SchoolViewModel(private val repo: SchoolRepo): ViewModel() {
     val schoolListObserver: LiveData<List<NYCSchool>>
     get() = mutableSchoolList
     private val mutableSchoolList = MutableLiveData<List<NYCSchool>> ()
@@ -29,10 +29,17 @@ class SchoolViewModel(private val repo: SchoolRepoImpl): ViewModel() {
         }
     }
 
+    // Workarounds made in the interest of expediency:
+    // Could not use android TextUtils utilities for checking isEmpty or IsDigit due to unit test
+    // constraints using junit.
+    // Didn't use robolectric tests since it slows down the running of tests as it loads the
+    // android env before running tests
     fun getFilteredSchoolList(filter: String, schools: List<NYCSchool>): List<NYCSchool> {
-        return if (filter.isDigitsOnly()) {
-            schools.filter { s -> s.zip.contains(filter) }
-        } else {
+        if (filter.length == 0) return schools
+        return try {
+            filter.toInt()
+            schools.filter { s -> s.zip == filter }
+        } catch (e: Exception) {
             schools.filter { s -> s.city.contains(filter, ignoreCase = true) }
         }
     }
