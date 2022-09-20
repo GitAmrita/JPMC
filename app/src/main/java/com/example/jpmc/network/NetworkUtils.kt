@@ -1,5 +1,6 @@
 package com.example.jpmc.network
 
+// Function to return user understandable error messages based on http error codes
 fun getErrorMessages(responseCode: Int): String {
     return when(responseCode) {
         in 400..499 -> " Bad request, client error."

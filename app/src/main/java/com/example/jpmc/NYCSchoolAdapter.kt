@@ -13,10 +13,13 @@ const val SCHOOL_NAME = "schoolName"
 const val SCHOOL_PHONE = "schoolPhone"
 const val SCHOOL_EMAIL = "schoolEmail"
 const val SCHOOL_WEBSITE = "schoolWebsite"
-class NYCSchoolAdapter(private val schoolList: List<NYCSchool>) : RecyclerView.Adapter<NYCSchoolAdapter.NYCSchoolViewHolder>() {
+// Adapter for recycle view displaying the list of school in the first screen
+class NYCSchoolAdapter(private val schoolList: List<NYCSchool>) :
+    RecyclerView.Adapter<NYCSchoolAdapter.NYCSchoolViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NYCSchoolViewHolder {
-        val binding = ItemNycSchoolBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemNycSchoolBinding.inflate(LayoutInflater.from(parent.context), parent,
+            false)
         return NYCSchoolViewHolder(binding)
     }
 
@@ -28,7 +31,8 @@ class NYCSchoolAdapter(private val schoolList: List<NYCSchool>) : RecyclerView.A
         return schoolList.size
     }
 
-    inner class NYCSchoolViewHolder(private val binding: ItemNycSchoolBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class NYCSchoolViewHolder(
+        private val binding: ItemNycSchoolBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(school: NYCSchool) {
             binding.name.text = school.name
             binding.address.text = school.address

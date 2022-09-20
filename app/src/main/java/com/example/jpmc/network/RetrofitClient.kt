@@ -12,6 +12,8 @@ object RetrofitClient {
     private const val BASE_URL = "https://data.cityofnewyork.us/"
     private const val TIME_OUT = 60L
 
+    // OkHttp will automatically log incoming and outgoing HTTP requests and responses to Logcat.
+    // This is added for debugging purposes while development.
     private val interceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }

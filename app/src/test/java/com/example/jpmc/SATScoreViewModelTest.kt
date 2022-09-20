@@ -18,6 +18,9 @@ class SATScoreViewModelTest {
     private lateinit var viewModel: SATScoreViewModel
     private lateinit var list: List<SATScore>
 
+    // In the interest of time, I haven't added the unit tests for the function that makes the api
+    // call. Such an example has been provided in the SchoolsViewModel tests.
+
     @Before
     fun setUp() {
         viewModel = SATScoreViewModel(satScoreRepo)

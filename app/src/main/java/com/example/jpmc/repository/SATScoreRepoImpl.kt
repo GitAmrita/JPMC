@@ -26,6 +26,5 @@ class SATScoreRepoImpl: SATScoreRepo {
                 NetworkResult.Error(e.message)
             }
         }
-
     }
 }

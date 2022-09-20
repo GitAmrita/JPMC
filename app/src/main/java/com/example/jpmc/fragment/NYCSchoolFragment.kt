@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jpmc.NYCSchoolAdapter
 import com.example.jpmc.databinding.FragmentNycSchoolBinding
 import com.example.jpmc.model.NYCSchool
-import com.example.jpmc.repository.SchoolRepo
 import com.example.jpmc.repository.SchoolRepoImpl
 import com.example.jpmc.viewModel.SchoolViewModel
 import com.example.jpmc.viewModel.SchoolViewModelFactory
 
+// This fragment displays a list of NYC School
 class NYCSchoolFragment: Fragment() {
     private val logTag = "NYCSchoolFragment"
     private lateinit var schools: List<NYCSchool>
@@ -34,6 +34,7 @@ class NYCSchoolFragment: Fragment() {
         binding = FragmentNycSchoolBinding.inflate(inflater, container, false)
         initializeRecyclerView()
         initializeObserver()
+        // Extra functionality, filtering the list based on city and zip
         setOnFilterClick()
         getSchools()
         return binding.root
@@ -47,7 +48,6 @@ class NYCSchoolFragment: Fragment() {
         viewModel.schoolListObserver.observe(viewLifecycleOwner, Observer {
             binding.schoolRecyclerView.adapter = NYCSchoolAdapter(it)
             schools = it
-            // todo make it efficient,
             binding.schoolRecyclerView.adapter?.notifyDataSetChanged()
             binding.progressBar.visibility = View.GONE
         })
@@ -56,8 +56,7 @@ class NYCSchoolFragment: Fragment() {
             Log.e(logTag, it)
             binding.progressBar.visibility = View.GONE
             Toast.makeText(requireContext(),
-                "Error occurred while retrieving school list",
-                Toast.LENGTH_SHORT).show()
+                "Error occurred while retrieving school list", Toast.LENGTH_SHORT).show()
         })
     }
 
@@ -65,6 +64,7 @@ class NYCSchoolFragment: Fragment() {
         viewModel.getSchoolList()
     }
 
+    // Extra functionality: Filter the result set based on city and zip of the school.
     private fun setOnFilterClick() {
         binding.filterButton.setOnClickListener {
             val lst = viewModel.getFilteredSchoolList(binding.filterText.text.toString(), schools)
