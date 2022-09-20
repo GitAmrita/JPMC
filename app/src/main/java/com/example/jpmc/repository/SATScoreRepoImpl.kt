@@ -1,25 +1,24 @@
 package com.example.jpmc.repository
 
-import com.example.jpmc.model.NYCSchool
-import com.example.jpmc.network.SchoolApi
+import com.example.jpmc.model.SATScore
 import com.example.jpmc.network.NetworkResult
 import com.example.jpmc.network.RetrofitClient.getRetrofit
+import com.example.jpmc.network.SATScoreApi
 import com.example.jpmc.network.getErrorMessages
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 
-class SchoolRepoImpl : SchoolRepo {
-    private val api : SchoolApi = getRetrofit().create(SchoolApi::class.java)
+class SATScoreRepoImpl: SATScoreRepo {
+    private val api: SATScoreApi = getRetrofit().create(SATScoreApi::class.java)
 
-    override suspend fun getSchools(): NetworkResult<List<NYCSchool>> {
+    override suspend fun getSATScores(): NetworkResult<List<SATScore>> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = api.getSchools()
+                val response = api.getSATScores()
                 if (response.isSuccessful) {
-                    response.body()?. let {
-                        NetworkResult.Success(it)
-                    } ?: NetworkResult.Error("get school message body is empty")
+                    response.body() ?.let {
+                        NetworkResult.Success(data = it)
+                    } ?: NetworkResult.Error("get SAT score message body is empty")
                 } else {
                     NetworkResult.Error(getErrorMessages(response.code()))
                 }
@@ -27,5 +26,6 @@ class SchoolRepoImpl : SchoolRepo {
                 NetworkResult.Error(e.message)
             }
         }
+
     }
 }

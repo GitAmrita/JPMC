@@ -7,6 +7,15 @@
     <fragment
         android:id="@+id/NYCSchoolFragment"
         android:name="com.example.jpmc.fragment.NYCSchoolFragment"
-        android:label="NYCSchoolFragment"/>
+        android:label="NYCSchoolFragment">
+        <action
+            android:id="@+id/action_NYCSchool_to_SATScore_fragment"
+            app:destination="@id/SATScoreFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/SATScoreFragment"
+        android:name="com.example.jpmc.fragment.SATScoreFragment"
+        android:label="SATScoreFragment"/>
 
 </navigation>

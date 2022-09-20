@@ -44,11 +44,11 @@ class SchoolViewModel(private val repo: SchoolRepo): ViewModel() {
         }
     }
 
-    private fun getContent():ArrayList<NYCSchool> {
-        val list = ArrayList<NYCSchool>()
-        list.add(NYCSchool("abc", "123", "sc", "111"))
-        list.add(NYCSchool("nju", "45", "ol", "134"))
-        list.add(NYCSchool("kilop", "123786543", "scoplo", "11154637"))
-        return list
-    }
+//    private fun getContent():ArrayList<NYCSchool> {
+//        val list = ArrayList<NYCSchool>()
+//        list.add(NYCSchool("abc", "123", "sc", "111", "aaa"))
+//        list.add(NYCSchool("nju", "45", "ol", "134", "lll"))
+//        list.add(NYCSchool("kilop", "123786543", "scoplo", "11154637", "hhh"))
+//        return list
+//    }
 }

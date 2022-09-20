@@ -10,5 +10,13 @@ data class NYCSchool (
     @SerializedName("city")
     val city: String,
     @SerializedName("zip")
-    val zip: String
+    val zip: String,
+    @SerializedName("dbn")
+    val id: String,
+    @SerializedName("phone_number")
+    val phoneNo: String,
+    @SerializedName("school_email")
+    val email: String,
+    @SerializedName("website")
+    val website: String
  )

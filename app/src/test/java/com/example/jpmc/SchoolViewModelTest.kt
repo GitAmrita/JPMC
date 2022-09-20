@@ -23,9 +23,12 @@ class SchoolViewModelTest {
     @Before
     fun setUp() {
         viewModel = SchoolViewModel(schoolRepo)
-        list = listOf(NYCSchool("abc", "123", "sc", "111"),
-            NYCSchool("nju", "45", "ol", "134"),
-            NYCSchool("kilop", "123786543", "scoplo", "11154637")
+        list = listOf(NYCSchool("abc", "123", "sc", "111",
+            "qqq", "", "", ""),
+            NYCSchool("nju", "45", "ol", "134", "jjj"
+                , "", "", ""),
+            NYCSchool("kilop", "543", "scoplo", "11154637", "fff"
+                , "", "", "")
         )
     }
 
