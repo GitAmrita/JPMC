@@ -69,7 +69,6 @@ class SATScoreFragment: Fragment() {
             binding.satScoreGroup.visibility = View.VISIBLE
             binding.progressBar.visibility = View.GONE
         })
-
         viewModel.satScoreErrorObserver.observe(viewLifecycleOwner, Observer{
             Log.e(logTag, it)
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
