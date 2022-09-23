@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
 
-    // base url
     private const val BASE_URL = "https://data.cityofnewyork.us/"
     private const val TIME_OUT = 60L
 
