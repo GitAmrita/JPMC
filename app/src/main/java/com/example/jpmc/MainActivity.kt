@@ -37,8 +37,6 @@ of the app, UseCases could be used.
 Dependency injection was not used.
 * */
 
-// GIT PAT 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
-
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
